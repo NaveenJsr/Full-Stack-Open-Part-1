@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from './Button';
-import StatisticLine from './StatisticLine';
+import Statistics from './Statistics';
 
 const App = () =>
 {
@@ -8,13 +8,13 @@ const App = () =>
   const [ neutral, setNeutral ] = useState( 0 );
   const [ bad, setBad ] = useState( 0 );
 
+  const all = good + neutral + bad;
+  const average = ( good - bad ) / all || 0;
+  const positive = ( good / all ) * 100 || 0;
+
   const handleGoodClick = () => setGood( good + 1 );
   const handleNeutralClick = () => setNeutral( neutral + 1 );
   const handleBadClick = () => setBad( bad + 1 );
-
-  const total = good + neutral + bad;
-  const average = ( good - bad ) / total || 0; // avoid division by zero
-  const positivePercentage = ( good / total ) * 100 || 0; // avoid NaN
 
   return (
     <div>
@@ -22,24 +22,19 @@ const App = () =>
       <Button onClick={ handleGoodClick } text="good" />
       <Button onClick={ handleNeutralClick } text="neutral" />
       <Button onClick={ handleBadClick } text="bad" />
-      <h2>statistics</h2>
-      { total === 0 ? (
-        <p>No feedback given</p>
-      ) : (
-        <div>
-          <StatisticLine text="good" value={ good } />
-          <StatisticLine text="neutral" value={ neutral } />
-          <StatisticLine text="bad" value={ bad } />
-          <StatisticLine text="all" value={ total } />
-          <StatisticLine text="average" value={ average } />
-          <StatisticLine
-            text="positive"
-            value={ `${ positivePercentage }%` }
-          />
-        </div>
-      ) }
+
+      <h1>statistics</h1>
+      <Statistics
+        good={ good }
+        neutral={ neutral }
+        bad={ bad }
+        all={ all }
+        average={ average }
+        positive={ positive }
+      />
     </div>
   );
 };
+
 
 export default App;
