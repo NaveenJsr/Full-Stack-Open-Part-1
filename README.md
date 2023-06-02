@@ -1,6 +1,6 @@
-# Part-0
+# Full-Stack Open Part 0
 
-a. Introduction to React <br>
-b. JavaScript <br>
-c. Component state, event handlers <br>
-d. A more complex state, debugging React apps <br>
+* Introduction to React 
+* JavaScript 
+* Component state, event handlers 
+* A more complex state, debugging React apps 
